@@ -96,7 +96,7 @@ RetailScope/
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/RetailScope.git
+   git clone https://github.com/arnavpatil427gh/RetailScope.git
    cd RetailScope
    ```
 
@@ -132,11 +132,11 @@ RetailScope/
 
 ## Author
 
-**YOUR NAME**
+Arnav Patil
 
 Aspiring Data Analyst | Python | SQL | Data Visualization
 
-[GitHub Profile](https://github.com/YOUR_USERNAME)
+[GitHub Profile](https://github.com/arnavpatil427gh)
 
 ---
 
