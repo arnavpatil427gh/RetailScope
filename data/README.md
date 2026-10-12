@@ -1,10 +1,10 @@
 # Dataset
 
-This project uses the **Online Retail** dataset from the UCI Machine Learning Repository.
+This project uses the **E-Commerce Sales Analytics Dataset** from the Kaggle.
 
-**Source:** https://archive.ics.uci.edu/dataset/352/online+retail
+**Source:** https://www.kaggle.com/datasets/datascikhan/e-commerce-sales-and-customer-analytics
 
-The dataset contains transactional records from a UK-based online retailer between December 2010 and December 2011.
+The dataset contains transactional records from a UK-based online retailer between 2021 and 2025.
 
 ## Instructions
 
