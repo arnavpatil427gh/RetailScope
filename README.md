@@ -1,143 +1,334 @@
 # RetailScope — E-commerce Sales & Customer Intelligence
 
-An end-to-end data analytics project exploring online retail transactions, sales trends, product performance, and customer purchasing behavior using Python, Pandas, and RFM segmentation.
+An end-to-end Data Analytics project exploring e-commerce transactions to uncover sales trends, understand customer behaviour, identify valuable customer segments, and generate actionable business recommendations.
 
-## Overview
+## 📌 Project Overview
 
-RetailScope analyzes the UCI Online Retail dataset to uncover business insights from transactional data. The project covers data quality assessment, cleaning, exploratory data analysis (EDA), sales analysis, customer segmentation, and business recommendations.
+RetailScope transforms raw transactional data into business insights using Python, statistical analysis, customer segmentation, predictive modelling, and data visualization.
 
-The goal is to transform raw retail transactions into actionable insights that can support customer retention, product strategy, and market analysis.
+The project uses the **E-commerce dataset**, which contains transactions from a UK-based online gift retailer between 2021 and 2025.
 
-## Objectives
+The goal is to understand what drives revenue, how customers purchase over time, which customers deserve retention efforts, which products are frequently purchased together, and how historical sales can support short-term planning.
 
-- Assess and clean transactional data.
-- Analyze sales trends over time.
-- Identify top-performing products and countries.
-- Segment customers using Recency, Frequency, and Monetary (RFM) analysis.
-- Investigate cancellation-related records and their impact on customer metrics.
-- Translate analytical findings into business recommendations.
+## 🎯 Business Objectives
 
-## Dataset
+This project aims to answer the following business questions:
 
-**Source:** [UCI Online Retail Dataset](https://archive.ics.uci.edu/dataset/352/online+retail)
+- How do sales and revenue change over time?
+- Which products and countries contribute most to sales?
+- Who are the most valuable customers?
+- Which customers may require re-engagement or retention campaigns?
+- How do customers behave after their first purchase?
+- Which products are frequently purchased together?
+- Can historical transaction data help forecast short-term revenue?
+- How can customer analytics support targeted marketing and cross-selling?
 
-The dataset contains transactions from a UK-based online retailer between December 2010 and December 2011.
+## 📊 Dataset
 
-Key fields include invoice number, product code, description, quantity, invoice date, unit price, customer ID, and country.
+**Dataset:** E-Commerce Sales Analytics Dataset
 
-The raw dataset is not included in this repository. Refer to `data/README.md` for download and setup instructions.
+**Period:** 2021 – 2025
 
-## Tools & Technologies
+**Source:** [E-Commerce Sales Analytics Dataset](https://www.kaggle.com/datasets/datascikhan/e-commerce-sales-and-customer-analytics)
 
-- **Python** — analysis and data processing
-- **Pandas** — cleaning, transformation, aggregation, and analysis
-- **NumPy** — numerical operations
-- **Matplotlib** — data visualization
-- **Jupyter Notebook / Google Colab** — interactive analysis
-- **RFM Analysis** — customer segmentation
+The original dataset contains 25,909 transaction records and eleven columns.
 
-## Project Workflow
+| Column | Description |
+|---|---|
+| `InvoiceNo` | Invoice identifier; entries beginning with `C` indicate cancellations |
+| `StockCode` | Product identifier |
+| `Description` | Product description |
+| `Quantity` | Quantity purchased or returned |
+| `InvoiceDate` | Date and time of the transaction |
+| `UnitPrice` | Unit price in pounds sterling |
+| `CustomerID` | Customer identifier |
+| `Country` | Customer's country |
 
-1. **Data audit:** inspect dimensions, missing values, duplicates, and transaction anomalies.
-2. **Data cleaning:** remove exact duplicates and identify cancellation, return, and invalid-price records.
-3. **Exploratory analysis:** investigate sales patterns, product performance, and geographic distribution.
-4. **Customer analytics:** calculate recency, purchase frequency, and monetary value.
-5. **Customer segmentation:** group customers using rule-based RFM scores.
-6. **Cancellation investigation:** match potentially offsetting positive and negative transaction lines using defined criteria.
-7. **Business recommendations:** translate the findings into practical next steps.
+The dataset contains missing customer identifiers, duplicate records, returns, cancellations, and unusual transaction values. These characteristics make data cleaning and validation important parts of the analysis.
 
-## Key Findings
+## 🛠️ Tools & Technologies
 
-The following results come from the current analysis and should be interpreted according to the dataset filters described in the notebook.
+- **Python** — Data analysis and modelling
+- **Pandas & NumPy** — Data manipulation and numerical computation
+- **Matplotlib & Seaborn** — Data visualization
+- **Scikit-learn** — Customer clustering and evaluation
+- **Lifetimes / BG-NBD and Gamma-Gamma models** — Customer lifetime value analysis
+- **Statsmodels** — Time-series forecasting
+- **Mlxtend** — Market-basket analysis and association rules
+- **Jupyter Notebook / Google Colab** — Analysis environment
+- **Streamlit** — Interactive dashboard
 
-- **Positive sales value:** £10.64 million across the broad positive-sales subset.
-- **Geographic concentration:** the United Kingdom accounts for approximately 84.59% of positive sales value.
-- **Seasonality:** November 2011 is the highest-sales month in the observed period. December 2011 is incomplete because the dataset ends on December 9.
-- **Customer segmentation:** the adjusted RFM analysis contains 4,332 identified customers.
-- **Customer behavior:** Champions account for approximately 20.94% of the adjusted RFM customer population.
-- **Cancellation sensitivity:** the cancellation-adjusted purchase value differs from the baseline, demonstrating why transaction handling matters when measuring customer value.
+## 🔍 Project Workflow
 
-**Metric definitions matter:** positive sales value is not profit or definitive net revenue. The broad sales subset includes transactions without an identified customer, while RFM requires a customer ID. The cancellation-adjusted results rely on matching assumptions documented in the notebook.
+### 1. Data Loading and Initial Inspection
 
-## Visualizations
+- Load the raw transaction dataset.
+- Inspect dimensions, column types, missing values, duplicates, and value ranges.
+- Identify data quality issues before performing analysis.
 
-The notebook includes visualizations covering:
+### 2. Data Cleaning and Validation
 
-- Monthly positive sales value
-- Customer distribution by RFM segment
-- Top 10 products by positive sales value
-- Top 10 countries by positive sales value
-- Top 10 customers by adjusted monetary value
+- Remove duplicate transaction records.
+- Investigate missing customer and product information.
+- Identify returns, cancellations, non-positive prices, and unusual quantities.
+- Match eligible cancellations with their original transactions using transaction-level information.
+- Document cleaning decisions and assess their effect on the results.
 
-Exported chart images can be added to `reports/figures/` and embedded here as the repository develops.
+### 3. Feature Engineering
 
-## Repository Structure
+Create additional features and analytical tables to support:
+
+- Invoice-level analysis
+- Product-level analysis
+- Customer-level analysis
+- Monthly and weekly sales trends
+- Customer purchasing behaviour
+
+### 4. Exploratory Data Analysis (EDA)
+
+Explore sales performance across time, geography, products, and customers.
+
+Key areas include:
+
+- Monthly revenue trends and seasonality
+- Country-level sales distribution
+- Product revenue and concentration
+- Customer purchase frequency
+- Average order value
+- Returns and cancellation patterns
+
+### 5. RFM Customer Segmentation
+
+Segment customers using three metrics:
+
+- **Recency:** How recently a customer purchased
+- **Frequency:** How often a customer purchased
+- **Monetary:** How much a customer spent
+
+Customers are assigned scores and mapped to meaningful segments, including Champions, Potential Loyalists, Needs Attention, and Hibernating customers.
+
+These segments can support loyalty programmes, targeted promotions, and customer reactivation campaigns.
+
+### 6. Customer Segmentation Using K-Means
+
+Apply unsupervised machine learning to identify groups of customers with similar purchasing behaviour.
+
+The workflow includes:
+
+- Transforming skewed RFM features
+- Standardizing features
+- Evaluating candidate cluster counts
+- Comparing clustering quality metrics
+- Profiling the resulting customer groups
+
+The resulting clusters provide an alternative perspective to rule-based RFM segmentation.
+
+### 7. Cohort and Retention Analysis
+
+Group customers according to their first purchase month and track their purchasing activity across subsequent months.
+
+This analysis helps investigate:
+
+- Customer retention over time
+- Drop-off after the first purchase
+- Differences between acquisition cohorts
+- Opportunities to improve repeat purchases
+
+Incomplete observation periods are considered when interpreting cohort results.
+
+### 8. Customer Lifetime Value (CLV)
+
+Estimate future customer purchasing behaviour using probabilistic models.
+
+The analysis uses:
+
+- **BG/NBD:** Estimates expected future purchases and the probability that a customer remains active.
+- **Gamma-Gamma:** Estimates expected average order value for suitable customers.
+
+The resulting predictions are used to estimate expected customer revenue over a future 90-day period.
+
+These are model-based estimates, not guaranteed future revenue or customer profit.
+
+### 9. Market-Basket Analysis
+
+Use association-rule mining to identify products frequently purchased together.
+
+The workflow includes:
+
+- Preparing invoice-product baskets
+- Restricting the analysis to UK transactions
+- Selecting frequently occurring products to manage computational requirements
+- Generating association rules
+- Evaluating support, confidence, and lift
+
+Potential applications include product bundling, cross-selling, and complementary-product recommendations.
+
+### 10. Weekly Revenue Forecasting
+
+Compare forecasting approaches for short-term revenue planning.
+
+Models and baselines include:
+
+- Naive forecasting
+- Moving-average forecasting
+- Exponential smoothing (ETS)
+- ARIMA
+
+Model performance is compared using a hold-out period. The selected approach is intended to provide a practical short-term planning baseline.
+
+### 11. Customer Master Table and Dashboard
+
+Combine customer-level outputs into a consolidated analytical table containing information such as:
+
+- Customer identifiers
+- RFM metrics and segments
+- K-Means cluster assignments
+- Predicted future purchases
+- Estimated customer lifetime value
+- Customer activity probabilities
+
+The notebook also prepares aggregated outputs for use in an interactive Streamlit dashboard.
+
+### 12. Business Recommendations
+
+Translate analytical findings into potential business actions, such as:
+
+- Rewarding high-value customers
+- Re-engaging inactive customers
+- Improving second-purchase conversion
+- Recommending complementary products
+- Supporting inventory and revenue planning
+
+Recommendations should be evaluated against appropriate business metrics before implementation.
+
+## 📈 Expected Business Value
+
+RetailScope demonstrates how transactional data can support several practical business functions:
+
+| Business Area | Potential Application |
+|---|---|
+| Sales analytics | Understand revenue trends and product performance |
+| Customer retention | Identify customers who may need re-engagement |
+| Customer value | Prioritize retention efforts using RFM and CLV estimates |
+| Marketing | Design targeted campaigns for different customer segments |
+| Cross-selling | Identify product combinations for bundling and recommendations |
+| Planning | Use short-term revenue forecasts to support operational decisions |
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Install Python 3.10 or a compatible version for the selected dependencies.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/arnavpatil427gh/RetailScope
+cd RetailScope
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+Activate it:
+
+**Windows**
+
+```bash
+.venv\Scripts\activate
+```
+
+**macOS / Linux**
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+Create a `requirements.txt` containing the libraries used by the notebook, then run:
+
+```bash
+pip install -r requirements.txt
+```
+
+Core dependencies include:
+
+```text
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+statsmodels
+mlxtend
+lifetimes
+streamlit
+jupyter
+```
+
+Verify package compatibility with the versions used in the notebook before running the complete workflow.
+
+### 4. Download the dataset
+
+Download the Online Retail dataset from the [E-Commerce Sales Analytics Dataset](https://www.kaggle.com/datasets/datascikhan/e-commerce-sales-and-customer-analytics).
+
+Place the CSV or ZIP file in the location expected by the notebook, or update the data-loading path to match your local environment.
+
+### 5. Run the notebook
+
+Launch Jupyter:
+
+```bash
+jupyter notebook
+```
+
+Open the project notebook and execute the cells in order.
+
+Alternatively, upload the notebook and dataset to Google Colab and run the analysis there.
+
+## 📁 Repository Structure
 
 ```text
 RetailScope/
+│
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+│
 ├── data/
 │   └── README.md
+│
 ├── notebooks/
-│   └── retailscope_analysis.ipynb
-├── reports/
-│   ├── business_insights.md
-│   └── figures/
-├── src/
-│   └── README.md
-└── sql/
-    └── README.md
+    └── e_com_analysis.ipynb
 ```
 
-## How to Run
+## ⚠️ Limitations
 
-1. Clone this repository:
+- **Limited time period:** The dataset covers approximately one year, restricting the ability to estimate long-term trends and annual seasonality reliably.
+- **Missing customer identifiers:** Transactions without customer IDs can contribute to suitable sales and product analyses but cannot be assigned reliably to individual customers.
+- **Cancellation matching:** Some cancellations may not be matched confidently to original sales. Revenue metrics depend on the cancellation treatment applied.
+- **CLV assumptions:** Customer lifetime value estimates depend on model assumptions and the quality of the transaction history. Unavailable predictions must be investigated before aggregate results are reported.
+- **Revenue versus profit:** The dataset does not provide product costs, so revenue estimates must not be interpreted as profit.
+- **Forecast uncertainty:** Short-term forecasts are based on limited historical data and should be treated as planning estimates rather than guarantees.
+- **Market-basket scope:** Product filtering and country restrictions affect which association rules can be discovered.
 
-   ```bash
-   git clone https://github.com/arnavpatil427gh/RetailScope.git
-   cd RetailScope
-   ```
+## 🔮 Future Improvements
 
-2. Create and activate a virtual environment (recommended).
+- Strengthen cancellation and return reconciliation.
+- Add automated data-quality checks and reproducible data pipelines.
+- Validate customer lifetime value predictions and document model diagnostics.
+- Improve forecasting validation with rolling-origin evaluation.
+- Add SQL-based analysis and cross-check selected KPIs against Python.
+- Develop and document a complete interactive dashboard.
+- Add automated tests for key business metrics.
+- Track the effectiveness of customer retention and cross-selling recommendations.
 
-3. Install dependencies:
+## 👨‍💻 Project Purpose
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+RetailScope is a portfolio project designed to demonstrate practical Data Analytics skills, including data cleaning, exploratory analysis, business KPI development, customer segmentation, predictive modelling, and communicating data-driven recommendations.
 
-4. Download the dataset from the official UCI source and follow `data/README.md`.
-
-5. Open `notebooks/retailscope_analysis.ipynb` in Jupyter Notebook or upload it to Google Colab.
-
-6. Update the dataset path in the notebook if needed, then run the cells in order.
-
-## Limitations
-
-- The dataset covers a historical period and should not be treated as a representation of current retail trends.
-- Missing customer IDs prevent some transactions from being included in customer-level analysis.
-- Cancellation and return matching is rule-based; matched transactions are not guaranteed to represent every real-world cancellation.
-- RFM scores and segment definitions are analytical choices, not universal customer classifications.
-- Monetary value represents transaction value, not profit or customer lifetime value.
-
-## Future Improvements
-
-- Add SQL queries for business analysis.
-- Build an interactive dashboard in Power BI or Tableau.
-- Automate data validation and reporting.
-- Compare alternative RFM scoring approaches.
-- Evaluate customer retention and reactivation strategies.
-
-## Author
-
-Arnav Patil
-
-Aspiring Data Analyst | Python | SQL | Data Visualization
-
-[GitHub Profile](https://github.com/arnavpatil427gh)
-
----
-
-*This project was developed for learning and portfolio demonstration using a publicly available dataset.*
+It emphasizes not only producing analytical results, but also documenting assumptions, validating metrics, and understanding the limitations of the underlying data.
